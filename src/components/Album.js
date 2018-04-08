@@ -29,6 +29,9 @@ class Album extends React.Component {
             <col id="song-title-column"/>
             <col id="song-duration-column"/>
           </colgroup>
+          <tbody>
+            
+          </tbody>
         </table>
       </section>
     )

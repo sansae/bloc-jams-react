@@ -1,5 +1,6 @@
 import React from 'react';
 import albumData from './../data/albums';
+import PlayerBar from './PlayerBar';
 
 class Album extends React.Component {
   constructor(props) {
@@ -19,13 +20,13 @@ class Album extends React.Component {
     this.audioElement.src = album.songs[0].audioSrc;
   }
 
-  play() {
-    this.audioElement.play();
+  play(song) {
+    this.audioElement.play(song);
     this.setState({ isPlaying: true });
   }
 
-  pause() {
-    this.audioElement.pause();
+  pause(song) {
+    this.audioElement.pause(song);
     this.setState({ isPlaying: false });
   }
 
@@ -38,14 +39,22 @@ class Album extends React.Component {
     const isSameSong = this.state.currentSong === song;
 
     if (this.state.isPlaying && isSameSong) {
-      this.pause();
+      this.pause(song);
     } else {
       if (!isSameSong) {
         this.setSong(song);
       }
-      this.play();
+      this.play(song);
     }
 
+  }
+
+  handlePrevClick() {
+    const currentIndex = this.state.album.songs.findIndex(song => song === this.state.currentSong);
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex;
+    const newSong = this.state.album.songs[prevIndex];
+    this.setSong(newSong);
+    this.play(newSong);
   }
 
   render () {
@@ -88,6 +97,12 @@ class Album extends React.Component {
             }
           </tbody>
         </table>
+        <PlayerBar
+          handlePrevClick={() => this.handlePrevClick()}
+          handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+          isPlaying={this.state.isPlaying}
+          currentSong={this.state.currentSong}
+        />
       </section>
     )
   }

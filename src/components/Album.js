@@ -57,6 +57,15 @@ class Album extends React.Component {
     this.play(newSong);
   }
 
+  handleNextClick() {
+    const album = this.state.album;
+    const currentIndex = album.songs.findIndex(song => this.state.currentSong === song);
+    const nextIndex = currentIndex !== album.songs.length - 1 ? currentIndex + 1 : currentIndex;
+    const newSong = album.songs[nextIndex];
+    this.setSong(newSong);
+    this.play(newSong);
+  }
+
   render () {
     return (
       <section className="album">
@@ -98,6 +107,7 @@ class Album extends React.Component {
           </tbody>
         </table>
         <PlayerBar
+          handleNextClick={() => this.handleNextClick()}
           handlePrevClick={() => this.handlePrevClick()}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           isPlaying={this.state.isPlaying}

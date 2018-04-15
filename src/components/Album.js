@@ -13,11 +13,32 @@ class Album extends React.Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      isPlaying: false
+      isPlaying: false,
+      currentTime: 0,
+      duration: album.songs[0].duration
     }
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+  }
+
+  componentDidMount() {
+    this.eventListeners = {
+      timeupdate: e => {
+        this.setState({ currentTime: this.audioElement.currentTime });
+      },
+      durationchange: e => {
+        this.setState({ duration: this.audioElement.duration });
+      }
+    };
+    this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+  }
+
+  componentWillUnmount() {
+    this.audioElement.src = null;
+    this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+    this.audioElement.removeEventListener('durationchange', this.eventListeners.timeupdate);
   }
 
   play(song) {
@@ -66,6 +87,12 @@ class Album extends React.Component {
     this.play(newSong);
   }
 
+  handleTimeChange(e) {
+    const newTime = this.audioElement.duration * e.target.value;
+    this.audioElement.currentTime = newTime;
+    this.setState({ currentTime: newTime });
+  }
+
   render () {
     return (
       <section className="album">
@@ -95,8 +122,7 @@ class Album extends React.Component {
                   <td className="song-actions">
                     <button>
                       <span className="song-number">{index + 1}</span>
-                      <span className="ion-play"></span>
-                      <span className="ion-pause"></span>
+                      <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}></span>
                     </button>
                   </td>
                   <td className="song-title">{song.title}</td>
@@ -112,6 +138,9 @@ class Album extends React.Component {
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
+          handleTimeChange={(e) => this.handleTimeChange(e)}
         />
       </section>
     )

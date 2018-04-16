@@ -16,6 +16,7 @@ class Album extends React.Component {
       isPlaying: false,
       currentTime: 0,
       duration: album.songs[0].duration,
+      currentVolume: 1
     }
 
     this.audioElement = document.createElement('audio');
@@ -96,6 +97,7 @@ class Album extends React.Component {
   handleVolumeChange(e) {
     const newVolume = e.target.value / 100;
     this.audioElement.volume = newVolume;
+    this.setState({ currentVolume: newVolume });
   }
 
   render () {
@@ -145,6 +147,7 @@ class Album extends React.Component {
           currentSong={this.state.currentSong}
           currentTime={this.audioElement.currentTime}
           duration={this.audioElement.duration}
+          currentVolume={this.state.currentVolume}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
         />

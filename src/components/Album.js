@@ -46,8 +46,6 @@ class Album extends React.Component {
   }
 
   formatTime(duration) {
-    console.log(/[:]/.test(duration));
-    
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
     const getSeconds = seconds < 10 ? "0" + seconds : seconds;
@@ -157,7 +155,7 @@ class Album extends React.Component {
                     </button>
                   </td>
                   <td className="song-title">{song.title}</td>
-                  <td className="song-duration">{song.duration}</td>
+                  <td className="song-duration">{this.formatTime(song.duration)}</td>
                 </tr>
               )
             }

@@ -5,11 +5,11 @@ export default [{
     albumCover: '/assets/images/album_covers/03.jpg',
     slug: 'etc',
     songs: [
-      { title: 'The Story by Brandi Carlile', duration: '3:57', audioSrc: '/assets/music/modern-music/the-story.mp3' },
-      { title: 'Name by Goo Goo Dolls', duration: '4:34', audioSrc: '/assets/music/modern-music/name.m4a' },
-      { title: 'Procura Coquetearme by Chichi Peralta', duration: '4:32', audioSrc: '/assets/music/modern-music/procura-coquetearme.mp3' },
-      { title: 'Letter to Elise by the Cure', duration: '4:20', audioSrc: '/assets/music/modern-music/letter-to-elise.m4a' },
-      { title: 'Release by Pearl Jam', duration: '5:06', audioSrc: '/assets/music/modern-music/release.mp3' }
+      { title: 'The Story by Brandi Carlile', duration: '237', audioSrc: '/assets/music/modern-music/the-story.mp3' },
+      { title: 'Name by Goo Goo Dolls', duration: '274', audioSrc: '/assets/music/modern-music/name.m4a' },
+      { title: 'Procura Coquetearme by Chichi Peralta', duration: '272', audioSrc: '/assets/music/modern-music/procura-coquetearme.mp3' },
+      { title: 'Letter to Elise by the Cure', duration: '260', audioSrc: '/assets/music/modern-music/letter-to-elise.m4a' },
+      { title: 'Release by Pearl Jam', duration: '307', audioSrc: '/assets/music/modern-music/release.mp3' }
     ]
 }, {
   title: 'The Colors',

@@ -17,7 +17,8 @@ class Album extends React.Component {
       currentTime: 0,
       duration: album.songs[0].duration,
       currentVolume: 1,
-      minutesAndSeconds: ''
+      realTime: "--:--",
+      songTime: ''
     }
 
     this.audioElement = document.createElement('audio');
@@ -25,11 +26,16 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
-    this.formatTime(this.state.duration);
+    const songTime = this.formatTime(this.state.duration);
+    this.setState({ songTime })
 
     this.eventListeners = {
       timeupdate: e => {
         this.setState({ currentTime: this.audioElement.currentTime });
+
+        const realTime = this.formatTime(this.state.currentTime);
+
+        this.setState({ realTime });
       },
       durationchange: e => {
         this.setState({ duration: this.audioElement.duration });
@@ -37,6 +43,15 @@ class Album extends React.Component {
     };
     this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
     this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+  }
+
+  formatTime(duration) {
+    console.log(/[:]/.test(duration));
+    
+    const minutes = Math.floor(duration / 60);
+    const seconds = Math.floor(duration % 60);
+    const getSeconds = seconds < 10 ? "0" + seconds : seconds;
+    return `${minutes}:${getSeconds}`;
   }
 
   componentWillUnmount() {
@@ -68,11 +83,11 @@ class Album extends React.Component {
     } else {
       if (!isSameSong) {
         this.setSong(song);
-        this.formatTime(song.duration);
+        const songTime = this.formatTime(song.duration);
+        this.setState({ songTime })
       }
       this.play(song);
     }
-
   }
 
   handlePrevClick() {
@@ -81,7 +96,8 @@ class Album extends React.Component {
     const newSong = this.state.album.songs[prevIndex];
     this.setSong(newSong);
     this.play(newSong);
-    this.formatTime(newSong.duration);
+    const songTime = this.formatTime(newSong.duration);
+    this.setState({ songTime })
   }
 
   handleNextClick() {
@@ -91,7 +107,8 @@ class Album extends React.Component {
     const newSong = album.songs[nextIndex];
     this.setSong(newSong);
     this.play(newSong);
-    this.formatTime(newSong.duration);
+    const songTime = this.formatTime(newSong.duration);
+    this.setState({ songTime })
   }
 
   handleTimeChange(e) {
@@ -106,12 +123,6 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
-  formatTime(duration) {
-    const minutes = Math.floor(duration / 60);
-    const seconds = Math.floor(duration % 60);
-    const getSeconds = seconds < 10 ? "0" + seconds : seconds;
-    this.setState({ minutesAndSeconds: `${minutes}:${getSeconds}` });
-  }
 
   render () {
     return (
@@ -163,7 +174,8 @@ class Album extends React.Component {
           currentVolume={this.state.currentVolume}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
-          minutesAndSeconds={this.state.minutesAndSeconds}
+          realTime={this.state.realTime}
+          songTime={this.state.songTime}
         />
       </section>
     )

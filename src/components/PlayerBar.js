@@ -15,7 +15,7 @@ class PlayerBar extends React.Component {
             <span className="ion-skip-forward"></span>
           </button>
           <section id="time-control">
-            <div className="current-time">{this.props.currentTime}</div>
+            <div className="current-time">{this.props.realTime}</div>
             <input
               type="range"
               className="seek-bar"
@@ -25,7 +25,7 @@ class PlayerBar extends React.Component {
               step="0.01"
               onChange={this.props.handleTimeChange}
             />
-          <div className="total-time">{this.props.minutesAndSeconds}</div>
+          <div className="total-time">{this.props.songTime}</div>
           </section>
           <section id="volume-control">
             <div className="icon ion-volume-low"></div>

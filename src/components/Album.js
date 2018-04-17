@@ -16,7 +16,8 @@ class Album extends React.Component {
       isPlaying: false,
       currentTime: 0,
       duration: album.songs[0].duration,
-      currentVolume: 1
+      currentVolume: 1,
+      minutesAndSeconds: ''
     }
 
     this.audioElement = document.createElement('audio');
@@ -24,6 +25,8 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
+    this.formatTime(this.state.duration);
+
     this.eventListeners = {
       timeupdate: e => {
         this.setState({ currentTime: this.audioElement.currentTime });
@@ -65,6 +68,7 @@ class Album extends React.Component {
     } else {
       if (!isSameSong) {
         this.setSong(song);
+        this.formatTime(song.duration);
       }
       this.play(song);
     }
@@ -77,6 +81,7 @@ class Album extends React.Component {
     const newSong = this.state.album.songs[prevIndex];
     this.setSong(newSong);
     this.play(newSong);
+    this.formatTime(newSong.duration);
   }
 
   handleNextClick() {
@@ -86,6 +91,7 @@ class Album extends React.Component {
     const newSong = album.songs[nextIndex];
     this.setSong(newSong);
     this.play(newSong);
+    this.formatTime(newSong.duration);
   }
 
   handleTimeChange(e) {
@@ -98,6 +104,13 @@ class Album extends React.Component {
     const newVolume = e.target.value / 100;
     this.audioElement.volume = newVolume;
     this.setState({ currentVolume: newVolume });
+  }
+
+  formatTime(duration) {
+    const minutes = Math.floor(duration / 60);
+    const seconds = Math.floor(duration % 60);
+    const getSeconds = seconds < 10 ? "0" + seconds : seconds;
+    this.setState({ minutesAndSeconds: `${minutes}:${getSeconds}` });
   }
 
   render () {
@@ -150,6 +163,7 @@ class Album extends React.Component {
           currentVolume={this.state.currentVolume}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          minutesAndSeconds={this.state.minutesAndSeconds}
         />
       </section>
     )

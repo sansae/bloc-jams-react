@@ -12,7 +12,7 @@ class App extends Component {
         <section className="content">
           <div className="columns">
             <main className="main">
-              <header>
+              <header className="header">
                 <nav>
                   <Link to='/'>Landing</Link>
                   <Link to='/library'>Library</Link>
@@ -22,6 +22,9 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route path="/library" component={Library} />
               <Route path="/album/:slug" component={Album} />
+              <footer className="footer">
+                Footer goes here
+              </footer>
             </main>
             <aside className="first-sidebar">First sidebar</aside>
             <aside className="second-sidebar">Right sidebar</aside>

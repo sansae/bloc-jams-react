@@ -34,14 +34,31 @@ nav {
   border: 3px solid blue;
   order: 2;
   flex: 1;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
 }
 
 .first-sidebar {
   order: 1;
-  border: 3px solid purple;
+  border: 3px solid green;
 }
 
 .second-sidebar {
   border: 3px solid orange;
   order: 3;
+}
+
+.footer {
+  border: 3px solid purple;
+  padding: 25px;
+}
+
+.header h1 {
+  border: 3px solid green;
+}
+
+.selling-points {
+  border: 3px solid orange;
+  margin-bottom: 17%;
 }

@@ -1,30 +1,8 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #song-list {
@@ -33,4 +11,37 @@
 
 table, tbody, tr, th, td {
   border: 1px solid black;
+}
+
+nav {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+}
+
+.columns {
+  display: flex;
+  flex: 1;
+}
+
+.main {
+  border: 3px solid blue;
+  order: 2;
+  flex: 1;
+}
+
+.first-sidebar {
+  order: 1;
+  border: 3px solid purple;
+}
+
+.second-sidebar {
+  border: 3px solid orange;
+  order: 3;
 }

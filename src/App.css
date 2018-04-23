@@ -3,6 +3,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Farsan";
+  font-size: 25px;
+}
+
+#app-title {
+  text-decoration: underline;
 }
 
 #song-list {
@@ -14,10 +20,15 @@ table, tbody, tr, th, td {
 }
 
 nav {
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
   padding: 50px;
+}
+
+.nav-links {
+  font-size: 30px;
+  color: black;
+  text-decoration: none;
 }
 
 .content {
@@ -31,9 +42,8 @@ nav {
 }
 
 .main {
-  border: 3px solid blue;
   order: 2;
-  flex: 1;
+  flex: 3;
   flex-direction: column;
   display: flex;
   justify-content: space-between;
@@ -41,24 +51,21 @@ nav {
 
 .first-sidebar {
   order: 1;
-  border: 3px solid green;
 }
 
 .second-sidebar {
-  border: 3px solid orange;
   order: 3;
 }
 
+aside {
+  flex: 1;
+  background: #FFF8DC;
+}
+
 .footer {
-  border: 3px solid purple;
   padding: 25px;
 }
 
-.header h1 {
-  border: 3px solid green;
-}
-
 .selling-points {
-  border: 3px solid orange;
   margin-bottom: 17%;
 }

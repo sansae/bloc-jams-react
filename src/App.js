@@ -14,20 +14,19 @@ class App extends Component {
             <main className="main">
               <header className="header">
                 <nav>
-                  <Link to='/'>Landing</Link>
-                  <Link to='/library'>Library</Link>
+                  <Link class="nav-links" to='/'>Landing</Link>
+                  <Link class="nav-links" to='/library'>Library</Link>
                 </nav>
-                <h1>Bloc Jams</h1>
+                <h1 id="app-title">Bloc Jams</h1>
               </header>
               <Route exact path="/" component={Landing} />
               <Route path="/library" component={Library} />
               <Route path="/album/:slug" component={Album} />
               <footer className="footer">
-                Footer goes here
               </footer>
             </main>
-            <aside className="first-sidebar">First sidebar</aside>
-            <aside className="second-sidebar">Right sidebar</aside>
+            <aside className="first-sidebar"></aside>
+            <aside className="second-sidebar"></aside>
           </div>
         </section>
       </div>

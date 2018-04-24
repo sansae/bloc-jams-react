@@ -18,11 +18,14 @@ class Album extends React.Component {
       duration: album.songs[0].duration,
       currentVolume: 1,
       realTime: "--:--",
-      songTime: ''
+      songTime: '',
+      className: ""
     }
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+
+    this.onHover = this.onHover.bind(this);
   }
 
   componentDidMount() {
@@ -121,6 +124,16 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
+  onHover(index) {
+    console.log(`onHover executed, index = ${index}`);
+
+    const btnClass = this.state.className === "" ? "ion-play" : "";
+    this.setState({ className: btnClass });
+
+    document.getElementById("")
+    // className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}
+  }
+
 
   render () {
     return (
@@ -150,8 +163,8 @@ class Album extends React.Component {
                 <tr className="song" key={index} onClick={() =>  this.handleSongClick(song)}>
                   <td className="song-actions">
                     <button>
-                      <span className="song-number">{index + 1}</span>
-                      <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}></span>
+                      <span className={this.state.className} onMouseEnter={() => this.onHover(index + 1)} onMouseLeave={() => this.onHover(index + 1)} >{index + 1}</span>
+                      <span></span>
                     </button>
                   </td>
                   <td className="song-title">{song.title}</td>

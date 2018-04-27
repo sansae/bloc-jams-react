@@ -19,7 +19,8 @@ class Album extends React.Component {
       currentVolume: 1,
       realTime: "--:--",
       songTime: '',
-      className: ""
+      className: "",
+      hoveredState: false
     }
 
     this.audioElement = document.createElement('audio');
@@ -124,16 +125,18 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
-  onHover(index) {
-    console.log(`onHover executed, index = ${index}`);
+  onHover(e, index) {
+    const hoveredState = this.state.hoveredState === false ? true : false
+    this.setState({ hoveredState: hoveredState });
 
     const btnClass = this.state.className === "" ? "ion-play" : "";
+
     this.setState({ className: btnClass });
 
-    document.getElementById("")
+    console.log(`onHover executed, index = ${index}`);
+
     // className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}
   }
-
 
   render () {
     return (
@@ -161,10 +164,14 @@ class Album extends React.Component {
             {
               this.state.album.songs.map((song, index) =>
                 <tr className="song" key={index} onClick={() =>  this.handleSongClick(song)}>
-                  <td className="song-actions">
-                    <button>
-                      <span className={this.state.className} onMouseEnter={() => this.onHover(index + 1)} onMouseLeave={() => this.onHover(index + 1)} >{index + 1}</span>
-                      <span></span>
+                  <td key={index} className="song-actions">
+                    <button
+                      id="btn"
+                      key={index}
+                      className={this.state.className}
+                      onMouseEnter={(e) => this.onHover(e, index + 1)}
+                      onMouseLeave={(e) => this.onHover(e, index + 1)}>
+                      {this.state.hoveredState ? "" : index + 1}
                     </button>
                   </td>
                   <td className="song-title">{song.title}</td>

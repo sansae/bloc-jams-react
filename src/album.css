@@ -1,0 +1,7 @@
+tr:hover .ion-play {
+  display: block;
+}
+
+tr .ion-play, tr:hover .song-number {
+  display: none;
+}

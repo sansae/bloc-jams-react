@@ -1,6 +1,7 @@
 import React from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import './../album.css';
 
 class Album extends React.Component {
   constructor(props) {
@@ -19,14 +20,14 @@ class Album extends React.Component {
       currentVolume: 1,
       realTime: "--:--",
       songTime: '',
-      className: "",
-      hoveredState: false
+      // className: "",
+      // hoveredState: false
     }
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
 
-    this.onHover = this.onHover.bind(this);
+    // this.onHover = this.onHover.bind(this);
   }
 
   componentDidMount() {
@@ -125,18 +126,21 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
-  onHover(e, index) {
-    const hoveredState = this.state.hoveredState === false ? true : false
-    this.setState({ hoveredState: hoveredState });
-
-    const btnClass = this.state.className === "" ? "ion-play" : "";
-
-    this.setState({ className: btnClass });
-
-    console.log(`onHover executed, index = ${index}`);
-
-    // className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}
-  }
+  // onHover(e, index) {
+  //   var buttons = document.getElementsByTagName("BUTTON");
+  //   console.log(e.target);
+  //
+  //
+  //   const hoveredState = this.state.hoveredState === false ? true : false;
+  //   this.setState({ hoveredState: hoveredState });
+  //
+  //   const btnClass = this.state.className === "" ? "ion-play" : "";
+  //   this.setState({ className: btnClass });
+  //
+  //   console.log(`onHover executed, index = ${index}`);
+  //
+  //   className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}
+  // }
 
   render () {
     return (
@@ -165,13 +169,12 @@ class Album extends React.Component {
               this.state.album.songs.map((song, index) =>
                 <tr className="song" key={index} onClick={() =>  this.handleSongClick(song)}>
                   <td key={index} className="song-actions">
-                    <button
-                      id="btn"
-                      key={index}
-                      className={this.state.className}
-                      onMouseEnter={(e) => this.onHover(e, index + 1)}
-                      onMouseLeave={(e) => this.onHover(e, index + 1)}>
-                      {this.state.hoveredState ? "" : index + 1}
+                    <button>
+                      <span>
+                        <span  className="song-number">{this.state.isPlaying && song === this.state.currentSong ? "" : index + 1}</span>
+                        <span  className={this.state.isPlaying && song === this.state.currentSong ? "" : "ion-play"}></span>
+                        <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? ("ion-pause") : ""}></span>
+                      </span>
                     </button>
                   </td>
                   <td className="song-title">{song.title}</td>

@@ -20,14 +20,11 @@ class Album extends React.Component {
       currentVolume: 1,
       realTime: "--:--",
       songTime: '',
-      // className: "",
-      // hoveredState: false
+      pause: false
     }
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
-
-    // this.onHover = this.onHover.bind(this);
   }
 
   componentDidMount() {
@@ -66,11 +63,13 @@ class Album extends React.Component {
   play(song) {
     this.audioElement.play(song);
     this.setState({ isPlaying: true });
+    this.setState({ pause: false });
   }
 
   pause(song) {
     this.audioElement.pause(song);
     this.setState({ isPlaying: false });
+    this.setState({ pause: true });
   }
 
   setSong(song) {
@@ -126,22 +125,6 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
-  // onHover(e, index) {
-  //   var buttons = document.getElementsByTagName("BUTTON");
-  //   console.log(e.target);
-  //
-  //
-  //   const hoveredState = this.state.hoveredState === false ? true : false;
-  //   this.setState({ hoveredState: hoveredState });
-  //
-  //   const btnClass = this.state.className === "" ? "ion-play" : "";
-  //   this.setState({ className: btnClass });
-  //
-  //   console.log(`onHover executed, index = ${index}`);
-  //
-  //   className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : "ion-play"}
-  // }
-
   render () {
     return (
       <section className="album">
@@ -171,8 +154,8 @@ class Album extends React.Component {
                   <td key={index} className="song-actions">
                     <button>
                       <span>
-                        <span  className="song-number">{this.state.isPlaying && song === this.state.currentSong ? "" : index + 1}</span>
-                        <span  className={this.state.isPlaying && song === this.state.currentSong ? "" : "ion-play"}></span>
+                        <span  className="song-number">{(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : index + 1}</span>
+                        <span  className={(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : "ion-play"}></span>
                         <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? ("ion-pause") : ""}></span>
                       </span>
                     </button>

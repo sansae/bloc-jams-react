@@ -20,7 +20,7 @@ class Album extends React.Component {
       currentVolume: 1,
       realTime: "--:--",
       songTime: '',
-      pause: false
+      emptyString: false
     }
 
     this.audioElement = document.createElement('audio');
@@ -63,13 +63,13 @@ class Album extends React.Component {
   play(song) {
     this.audioElement.play(song);
     this.setState({ isPlaying: true });
-    this.setState({ pause: false });
+    this.setState({ emptyString: false });
   }
 
   pause(song) {
     this.audioElement.pause(song);
     this.setState({ isPlaying: false });
-    this.setState({ pause: true });
+    this.setState({ emptyString: true });
   }
 
   setSong(song) {
@@ -154,9 +154,11 @@ class Album extends React.Component {
                   <td key={index} className="song-actions">
                     <button>
                       <span>
-                        <span  className="song-number">{(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : index + 1}</span>
-                        <span  className={(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : "ion-play"}></span>
-                        <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? ("ion-pause") : ""}></span>
+                        <span  className="song-number">{(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) || (!this.state.isPlaying && song === this.state.currentSong && this.state.currentTime > 0) ? "" : index + 1}</span>
+
+                        <span className={(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : "ion-play"}></span>
+
+                        <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : ""}></span>
                       </span>
                     </button>
                   </td>

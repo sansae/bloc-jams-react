@@ -19,8 +19,7 @@ class Album extends React.Component {
       duration: album.songs[0].duration,
       currentVolume: 1,
       realTime: "--:--",
-      songTime: '',
-      emptyString: false
+      songTime: ''
     }
 
     this.audioElement = document.createElement('audio');
@@ -63,13 +62,11 @@ class Album extends React.Component {
   play(song) {
     this.audioElement.play(song);
     this.setState({ isPlaying: true });
-    this.setState({ emptyString: false });
   }
 
   pause(song) {
     this.audioElement.pause(song);
     this.setState({ isPlaying: false });
-    this.setState({ emptyString: true });
   }
 
   setSong(song) {

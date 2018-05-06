@@ -5,3 +5,7 @@ tr:hover .ion-play {
 tr .ion-play, tr:hover .song-number {
   display: none;
 }
+
+#font-awesome-play {
+  margin: -3px -3px;
+}

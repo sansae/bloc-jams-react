@@ -122,6 +122,10 @@ class Album extends React.Component {
     this.setState({ currentVolume: newVolume });
   }
 
+  conditions(song) {
+    return this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration;
+  }
+
   render () {
     return (
       <section className="album">
@@ -151,11 +155,11 @@ class Album extends React.Component {
                   <td key={index} className="song-actions">
                     <button>
                       <span>
-                        <span  className="song-number">{(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) || (!this.state.isPlaying && song === this.state.currentSong && this.state.currentTime > 0) ? "" : index + 1}</span>
+                        <span  className="song-number">{(this.conditions(song)) || (!this.state.isPlaying && song === this.state.currentSong && this.state.currentTime > 0) ? (!this.state.isPlaying ? <i id="font-awesome-play">&#9658;</i> : "") : index + 1}</span>
 
-                        <span className={(this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration) ? "" : "ion-play"}></span>
+                        <span className={(this.conditions(song)) ? "" : "ion-play"}></span>
 
-                        <span className={this.state.isPlaying && song === this.state.currentSong && this.state.currentTime !== this.state.duration ? "ion-pause" : ""}></span>
+                        <span className={(this.conditions(song)) ? "ion-pause" : ""}></span>
                       </span>
                     </button>
                   </td>

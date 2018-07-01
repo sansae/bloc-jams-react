@@ -155,7 +155,7 @@ class Album extends React.Component {
                   <td key={index} className="song-actions">
                     <button>
                       <span>
-                        <span  className="song-number">{(this.conditions(song)) || (!this.state.isPlaying && song === this.state.currentSong && this.state.currentTime > 0) ? (!this.state.isPlaying ? <i id="font-awesome-play">&#9658;</i> : "") : index + 1}</span>
+                        <span className="song-number">{(this.conditions(song)) || (!this.state.isPlaying && song === this.state.currentSong && this.state.currentTime > 0) ? (!this.state.isPlaying ? <i id="font-awesome-play">&#9658;</i> : "") : index + 1}</span>
 
                         <span className={(this.conditions(song)) ? "" : "ion-play"}></span>
 

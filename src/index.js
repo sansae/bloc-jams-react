@@ -13,6 +13,6 @@ ReactDOM.render(
   , document.getElementById('root'));
 registerServiceWorker();
 
-setInterval(() => {
-  http.get("http://bloc-jams-react-kesa.herokuapp.com/");
-}, 300000);
+// setInterval(() => {
+//   http.get("http://bloc-jams-react-kesa.herokuapp.com/");
+// }, 300000);
